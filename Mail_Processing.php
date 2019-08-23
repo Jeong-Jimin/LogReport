@@ -17,7 +17,7 @@ class SendMail
 				$mail = new PHPMailer(true);
 				$mail->isSMTP();
 				$mail->Username = 'jimin57465@naver.com';
-				$mail->Password = 'dlwl1004';
+				$mail->Password = 'password';
 
 
 				$mail->Host = 'smtp.naver.com';
