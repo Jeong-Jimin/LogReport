@@ -8,22 +8,22 @@ class LogProcessing
 
 function __construct()
 {
-	$this->DB 						= 		new DBProcessing();
-	$this->pv_count 			= 		0;
+	$this->DB = new DBProcessing();
+	$this->pv_count = 0;
 }
 
 	function getLogData($yesterday)
 	{
-		$matches 					=	 	array();
-		$access_log_file 	= 		"/var/log/httpd/access_log.$yesterday";
-		$lines 						= 		file($access_log_file);
-		$ip_array     				=     array( );
-		$return_array			= 		array();
+		$matches = array();
+		$access_log_file = "/var/log/httpd/access_log.$yesterday";
+		$lines = file($access_log_file);
+		$ip_array = array( );
+		$return_array = array();
 
 
 			foreach ($lines as $line) 
 			{
-			  	$str 		=		explode(" ", $line);
+			  	$str = explode(" ", $line);
 
 	 			array_push($matches, preg_match('/ECMall/', $line)); 	#Insert all access for analisys pv
 			   
@@ -63,22 +63,22 @@ function __construct()
 	/************* get CVR function *************/
 function getCVR($yesterday, $pv_count)
 	{
-		$DB 						=		new DBProcessing();
-		$order_count 	=		$DB->Orderselect($yesterday);	#get order count
+		$DB = new DBProcessing();
+		$order_count = $DB->Orderselect($yesterday);	#get order count
 
-		$cvr_count 		= 		round($order_count / $pv_count  * 100, 2);
+		$cvr_count = round($order_count / $pv_count  * 100, 2);
 
 		return $cvr_count;
 	}
 }
 
-$yesterday 	=		date('ymd', strtotime('-1 day'));
+$yesterday = date('ymd', strtotime('-1 day'));
 
 #Create new object
-$Log 				= 		new LogProcessing();
+$Log = new LogProcessing();
 
 #Get log data
-$log_count 	= 		$Log->getLogData($yesterday);  
+$log_count = $Log->getLogData($yesterday);  
 
 
   ?>
